@@ -6,10 +6,14 @@ extracts action items.
 ## Setup
 
 ```bash
-cp .env.example .env      # add ANTHROPIC_API_KEY and OPENAI_API_KEY
-make up
+cp .env.example .env      # add your GEMINI_API_KEY
+make up                   # starts db, api (:8000), and the web UI (:5173)
 make health
 ```
+
+Open **http://localhost:5173**, load the bundled sample from the "＋ Load meeting"
+dialog, then ask questions (click a citation to jump to the transcript) or view
+extracted action items.
 
 ## Status
 
@@ -17,7 +21,7 @@ make health
 - [x] Phase 2 — parsing, chunking, embedding, ingest
 - [x] Phase 3 — retrieval, answering, refusal path
 - [x] Phase 4 — action item extraction
-- [ ] Phase 5 — UI
+- [x] Phase 5 — UI (React + Vite, served alongside the API)
 - [x] Phase 6 — evals and tests
 - [ ] Phase 7 — writeup
 - [x] Bonus — audio → transcript (Gemini multimodal), chains into ingest
