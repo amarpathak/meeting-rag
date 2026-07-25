@@ -20,7 +20,9 @@ class Settings(BaseSettings):
     similarity_floor: float = 0.35
     top_k: int = 5
 
-    chunk_target_tokens: int = 400
+    # 200 gives ~5 topically-coherent chunks on a single ~9-min transcript;
+    # 400 collapsed the whole meeting into 2 diluted chunks. Revisit against evals.
+    chunk_target_tokens: int = 200
     chunk_overlap_turns: int = 1
 
 
