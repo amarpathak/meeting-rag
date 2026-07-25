@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 from fastapi import FastAPI, UploadFile
 from pydantic import BaseModel
@@ -9,6 +10,7 @@ from .answer import answer_question
 from .config import get_settings
 from .ingest import ingest_transcript
 from .transcription import transcribe_audio
+from .transcripts import get_transcript, list_transcripts
 
 logging.basicConfig(
     level=logging.INFO,
@@ -43,6 +45,25 @@ def health() -> dict:
 async def ingest(file: UploadFile) -> dict:
     raw = (await file.read()).decode("utf-8")
     return ingest_transcript(file.filename or "upload.txt", raw)
+
+
+@app.post("/ingest-sample")
+def ingest_sample() -> dict:
+    # Convenience for reviewers: ingest the transcript(s) bundled at /data.
+    results = []
+    for path in sorted(Path("/data/transcripts").glob("*.txt")):
+        results.append(ingest_transcript(path.name, path.read_text()))
+    return {"ingested": results}
+
+
+@app.get("/transcripts")
+def transcripts() -> list[dict]:
+    return list_transcripts()
+
+
+@app.get("/transcripts/{transcript_id}")
+def transcript(transcript_id: int) -> dict:
+    return get_transcript(transcript_id)
 
 
 class AskRequest(BaseModel):
