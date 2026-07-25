@@ -29,7 +29,6 @@ def health() -> dict:
         "embedding_model": settings.embedding_model,
         "answer_model": settings.answer_model,
         "keys_present": {
-            "anthropic": bool(settings.anthropic_api_key),
-            "openai": bool(settings.openai_api_key),
+            "gemini": bool(settings.gemini_api_key),
         },
     }

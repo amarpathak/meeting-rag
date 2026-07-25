@@ -8,12 +8,11 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql://mi:mi@db:5432/meeting_intel"
 
-    anthropic_api_key: str = ""
-    openai_api_key: str = ""
+    gemini_api_key: str = ""
 
-    embedding_model: str = "text-embedding-3-small"
-    embedding_dims: int = 1536
-    answer_model: str = "claude-sonnet-4-5"
+    embedding_model: str = "gemini-embedding-001"
+    embedding_dims: int = 768
+    answer_model: str = "gemini-2.5-flash"
 
     # Below this cosine similarity we refuse to answer rather than let the
     # model improvise from weak context. Tuned by hand against evals/.

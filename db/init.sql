@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS chunks (
     ts_start      TEXT,
     ts_end        TEXT,
     token_count   INT,
-    embedding     VECTOR(1536),
+    embedding     VECTOR(768),
     created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
     UNIQUE (transcript_id, chunk_index)
 );
