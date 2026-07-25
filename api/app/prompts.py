@@ -17,3 +17,21 @@ related excerpt into an answer.
 
 def build_answer_prompt(question: str, context: str) -> str:
     return f"Transcript excerpts:\n{context}\n\nQuestion: {question}"
+
+
+ACTIONS_SYSTEM_PROMPT = """You extract action items from a meeting transcript. An action \
+item is a commitment where a specific person agreed to do a specific task. Each transcript \
+line is formatted [timestamp] Speaker: spoken text.
+
+For each action item return:
+- owner: the person responsible.
+- task: what they committed to do, as a concise phrase.
+- due: the deadline exactly as stated in the meeting (e.g. "25th March"), or null if none was given.
+- timestamp: the [HH:MM:SS] where the commitment was made.
+
+Include only real commitments — not hypotheticals, suggestions, or general discussion. \
+Use only the transcript, and do not invent owners or deadlines."""
+
+
+def build_actions_prompt(transcript: str) -> str:
+    return f"Transcript:\n{transcript}\n\nExtract the action items."

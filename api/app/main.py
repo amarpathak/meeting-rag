@@ -4,6 +4,7 @@ from fastapi import FastAPI, UploadFile
 from pydantic import BaseModel
 
 from . import db
+from .actions import extract_actions
 from .answer import answer_question
 from .config import get_settings
 from .ingest import ingest_transcript
@@ -50,3 +51,8 @@ class AskRequest(BaseModel):
 @app.post("/ask")
 def ask(req: AskRequest) -> dict:
     return answer_question(req.question)
+
+
+@app.get("/transcripts/{transcript_id}/actions")
+def actions(transcript_id: int) -> dict:
+    return extract_actions(transcript_id)
