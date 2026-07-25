@@ -1,0 +1,11 @@
+.env
+CLAUDE.md
+.qodo/
+.vscode/
+.claude/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+.next/
+evals/results/

@@ -1,0 +1,65 @@
+Meeting: Cardiology Advisory Board — CV-402 Phase III Readout
+Date: 2026-03-11
+Attendees: Dr. Meera Rao (Chair, Medical Affairs), Dr. Aaron Feld (External Advisor, Cardiology), Priya Nambiar (Clinical Operations), Tom Whelan (Biostatistics), Sofia Almeida (Regulatory)
+
+[00:00:12] Dr. Meera Rao: Thanks everyone for making the time. Agenda is short — Tom walks us through the topline, Aaron gives us the clinical read, then we decide what goes into the EMA package and what waits.
+
+[00:00:41] Tom Whelan: Topline first. Primary endpoint was met. Composite of cardiovascular death, non-fatal MI and stroke, hazard ratio 0.81, confidence interval 0.71 to 0.93, p equals 0.003.
+
+[00:01:15] Dr. Aaron Feld: That's a real effect size. How did the diabetic subgroup behave?
+
+[00:01:22] Tom Whelan: Directionally consistent but underpowered. Hazard ratio 0.86, interval crosses one. I would not lead with it.
+
+[00:01:48] Dr. Aaron Feld: Agreed, but clinicians will ask. If we say nothing they'll assume we're hiding something.
+
+[00:02:10] Dr. Meera Rao: So we prepare a reactive statement rather than proactive messaging. Priya, can your team draft that?
+
+[00:02:19] Priya Nambiar: Yes. I'll have a draft to Medical Affairs by the 25th of March.
+
+[00:02:35] Sofia Almeida: One flag from my side. If we put the subgroup in a reactive document it still goes through MLR review. That's a four week cycle at current volumes, so realistically it isn't usable until late April.
+
+[00:03:02] Dr. Meera Rao: Can we expedite?
+
+[00:03:07] Sofia Almeida: We can request priority review, but I've had two rejected this quarter. I'd plan for four weeks and be pleasantly surprised.
+
+[00:03:30] Tom Whelan: Second item. Enrollment. We closed at 4,180 patients against a target of 4,000, across 212 sites in 19 countries.
+
+[00:03:52] Priya Nambiar: Worth noting that India and Brazil over-enrolled significantly. India alone contributed 640 patients, which was roughly a third above plan.
+
+[00:04:15] Dr. Aaron Feld: Does that skew the demographic profile in a way reviewers will question?
+
+[00:04:22] Tom Whelan: Slightly. Mean age in the Indian cohort was 58 versus 64 overall. We've pre-specified an adjusted analysis, so it's defensible, but yes, expect a question.
+
+[00:04:50] Sofia Almeida: I'd want that adjusted analysis in the core dossier, not an appendix. Reviewers read appendices last and by then they've formed a view.
+
+[00:05:11] Dr. Meera Rao: Noted. Tom, please move the adjusted regional analysis into the main body.
+
+[00:05:18] Tom Whelan: Will do. That's a document restructure, not new work, so a week at most.
+
+[00:05:33] Dr. Aaron Feld: Third thing, and this is the one I care most about. Safety. Any signal on renal function?
+
+[00:05:44] Tom Whelan: Small imbalance. Creatinine elevations in 3.1 percent of the treatment arm versus 2.4 percent placebo. Not statistically significant.
+
+[00:06:02] Dr. Aaron Feld: Not significant, but in this class it's the exact thing that gets a label warning three years post-launch. I'd rather characterise it now than be surprised.
+
+[00:06:25] Dr. Meera Rao: What would characterising it look like?
+
+[00:06:31] Dr. Aaron Feld: A pooled analysis across the Phase II and Phase III sets, stratified by baseline eGFR. If it's flat across strata, that's a strong story. If it isn't, better we know before the regulator does.
+
+[00:07:00] Tom Whelan: I can run that. Realistically six weeks, because the Phase II data needs remapping to the current CDISC standard.
+
+[00:07:18] Dr. Meera Rao: Do it. Tom owns the pooled renal analysis, six weeks, target the 22nd of April.
+
+[00:07:35] Sofia Almeida: If it's ready by then it can go into the submission. After that it becomes a post-submission amendment, which nobody enjoys.
+
+[00:07:52] Dr. Meera Rao: Understood. Last item. Publication strategy. Aaron, where do we aim?
+
+[00:08:05] Dr. Aaron Feld: New England Journal for the primary. Realistically ESC Congress for the first public presentation, which means abstract deadline is the 15th of May.
+
+[00:08:26] Priya Nambiar: That's tight against the pooled analysis timeline.
+
+[00:08:33] Dr. Aaron Feld: The abstract doesn't need the renal pooling. The manuscript does. Different deadlines.
+
+[00:08:47] Dr. Meera Rao: Fine. Priya, you own the abstract submission for ESC, deadline 15th May. Let's close there.
+
+[00:09:02] Dr. Meera Rao: Summary of actions. Priya drafts the reactive subgroup statement by 25th March. Tom restructures the regional analysis into the core dossier within a week. Tom runs the pooled renal analysis targeting 22nd April. Priya submits the ESC abstract by 15th May. Sofia flags if the MLR timeline moves. Thanks everyone.
