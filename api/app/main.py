@@ -1,9 +1,10 @@
 import logging
 
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile
 
 from . import db
 from .config import get_settings
+from .ingest import ingest_transcript
 
 logging.basicConfig(
     level=logging.INFO,
@@ -32,3 +33,9 @@ def health() -> dict:
             "gemini": bool(settings.gemini_api_key),
         },
     }
+
+
+@app.post("/ingest")
+async def ingest(file: UploadFile) -> dict:
+    raw = (await file.read()).decode("utf-8")
+    return ingest_transcript(file.filename or "upload.txt", raw)
