@@ -14,9 +14,11 @@ class Settings(BaseSettings):
     embedding_dims: int = 768
     answer_model: str = "gemini-2.5-flash"
 
-    # Below this cosine similarity we refuse to answer rather than let the
-    # model improvise from weak context. Tuned by hand against evals/.
-    similarity_floor: float = 0.35
+    # Below this cosine similarity we refuse rather than let the model improvise
+    # from weak context. 0.60 tuned against evals/ for gemini-embedding-001:
+    # it clears every real answer (weakest 0.66) and refuses obvious off-topic
+    # questions. Topic-adjacent misses that clear it are caught by the prompt.
+    similarity_floor: float = 0.60
     top_k: int = 5
 
     # 200 gives ~5 topically-coherent chunks on a single ~9-min transcript;
