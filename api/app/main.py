@@ -1,8 +1,10 @@
 import logging
 
 from fastapi import FastAPI, UploadFile
+from pydantic import BaseModel
 
 from . import db
+from .answer import answer_question
 from .config import get_settings
 from .ingest import ingest_transcript
 
@@ -39,3 +41,12 @@ def health() -> dict:
 async def ingest(file: UploadFile) -> dict:
     raw = (await file.read()).decode("utf-8")
     return ingest_transcript(file.filename or "upload.txt", raw)
+
+
+class AskRequest(BaseModel):
+    question: str
+
+
+@app.post("/ask")
+def ask(req: AskRequest) -> dict:
+    return answer_question(req.question)

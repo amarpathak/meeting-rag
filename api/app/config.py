@@ -12,7 +12,9 @@ class Settings(BaseSettings):
 
     embedding_model: str = "gemini-embedding-001"
     embedding_dims: int = 768
-    answer_model: str = "gemini-2.5-flash"
+    # 'latest' alias so the reviewer's run doesn't break when a pinned flash
+    # version is retired (gemini-2.5-flash was already blocked for new keys).
+    answer_model: str = "gemini-flash-latest"
 
     # Below this cosine similarity we refuse rather than let the model improvise
     # from weak context. 0.60 tuned against evals/ for gemini-embedding-001:
