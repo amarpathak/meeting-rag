@@ -4,6 +4,7 @@ from .chunking import chunk_turns
 from .config import get_settings
 from .db import cursor
 from .embeddings import embed_documents
+from .normalize import normalize_transcript
 from .parsing import parse_transcript
 
 
@@ -31,6 +32,18 @@ def ingest_transcript(filename: str, raw: str) -> dict:
             return {"status": "already_ingested", "transcript_id": existing[0], "chunks": 0}
 
     parsed = parse_transcript(raw)
+    normalized = False
+    if not parsed.turns:
+        # Not in our [HH:MM:SS] Speaker: text format — try to normalize it with
+        # the LLM, then re-parse. If it still yields no turns, it isn't a meeting.
+        parsed = parse_transcript(normalize_transcript(raw))
+        normalized = True
+        if not parsed.turns:
+            raise ValueError(
+                "Could not read this file as a meeting transcript. Expected "
+                "speaker-labelled lines like '[HH:MM:SS] Speaker: text'."
+            )
+
     chunks = chunk_turns(
         parsed.turns, settings.chunk_target_tokens, settings.chunk_overlap_turns
     )
@@ -64,4 +77,9 @@ def ingest_transcript(filename: str, raw: str) -> dict:
                 ),
             )
 
-    return {"status": "ingested", "transcript_id": transcript_id, "chunks": len(chunks)}
+    return {
+        "status": "ingested",
+        "transcript_id": transcript_id,
+        "chunks": len(chunks),
+        "normalized": normalized,
+    }

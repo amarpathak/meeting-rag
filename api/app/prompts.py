@@ -45,3 +45,18 @@ person is named or addressed by name, use that name; otherwise use Speaker 1, Sp
 on. Output only transcript lines — no headers, summaries, or commentary."""
 
 TRANSCRIBE_INSTRUCTION = "Transcribe this meeting audio into the required format."
+
+
+NORMALIZE_SYSTEM_PROMPT = """You convert raw or oddly-formatted meeting text into a clean, \
+parseable transcript. Output one line per utterance, formatted exactly as:
+[HH:MM:SS] Speaker: spoken text
+Rules:
+- If the source has timestamps, keep them; otherwise assign increasing timestamps starting at 00:00:00.
+- If speakers are labelled, use those names; otherwise infer consistent labels (Speaker 1, Speaker 2, …).
+- Preserve the wording and meaning of what was said — do not summarise, invent, or drop content.
+- If the input is not a meeting or conversation at all, output nothing.
+- Output only transcript lines: no headers, commentary, or explanation."""
+
+
+def build_normalize_prompt(raw: str) -> str:
+    return f"Raw meeting text:\n{raw}\n\nReformat it into the required transcript format."

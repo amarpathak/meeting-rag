@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, HTTPException, UploadFile
 from pydantic import BaseModel
 
 from . import db
@@ -43,8 +43,14 @@ def health() -> dict:
 
 @app.post("/ingest")
 async def ingest(file: UploadFile) -> dict:
-    raw = (await file.read()).decode("utf-8")
-    return ingest_transcript(file.filename or "upload.txt", raw)
+    try:
+        raw = (await file.read()).decode("utf-8")
+    except UnicodeDecodeError:
+        raise HTTPException(status_code=400, detail="File must be UTF-8 text.")
+    try:
+        return ingest_transcript(file.filename or "upload.txt", raw)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
 
 
 @app.post("/ingest-sample")
@@ -104,5 +110,8 @@ async def transcribe(file: UploadFile, ingest: bool = False) -> dict:
     audio = await file.read()
     result = transcribe_audio(file.filename or "audio", audio, _audio_mime(file))
     if ingest:
-        result["ingest"] = ingest_transcript(file.filename or "audio.txt", result["transcript"])
+        try:
+            result["ingest"] = ingest_transcript(file.filename or "audio.txt", result["transcript"])
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc))
     return result

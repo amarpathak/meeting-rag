@@ -18,8 +18,9 @@ def client() -> genai.Client:
     return _client
 
 
-def cost_usd(input_tokens: int, output_tokens: int) -> float:
-    return input_tokens * INPUT_COST_PER_TOKEN + output_tokens * OUTPUT_COST_PER_TOKEN
+def cost_usd(input_tokens: int | None, output_tokens: int | None) -> float:
+    # Token counts can be None (e.g. a call that produced no output), so coerce.
+    return (input_tokens or 0) * INPUT_COST_PER_TOKEN + (output_tokens or 0) * OUTPUT_COST_PER_TOKEN
 
 
 def log_query(
