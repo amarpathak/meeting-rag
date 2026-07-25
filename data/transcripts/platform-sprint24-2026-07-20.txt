@@ -1,0 +1,20 @@
+Meeting: Platform Team — Sprint 24 Retro & Planning
+Date: 2026-07-20
+Attendees: Ravi Menon (Eng Manager), Dana Cole (Backend), Iris Park (Frontend), Sam Okafor (SRE), Lena Fischer (Product)
+
+[00:00:09] Ravi Menon: Quick retro then we plan Sprint 25. Dana, start us off — the migration shipped?
+[00:00:21] Dana Cole: Shipped, but it locked the orders table for about ninety seconds in production. No data loss, but checkout errored for a chunk of users during the window.
+[00:00:40] Sam Okafor: We only found out because customers complained. We had no alert on checkout error rate, which is the real miss.
+[00:01:02] Ravi Menon: Agreed, that's the headline. Sam, can you own adding an alert on checkout error rate and p95 latency?
+[00:01:11] Sam Okafor: Yes. I'll wire it into the on-call dashboard and set a page threshold. I can have it live by the 24th.
+[00:01:29] Dana Cole: And I'll redo the migration pattern to use an online schema change so we never lock a hot table again. That's a couple days of work.
+[00:01:47] Lena Fischer: How does that affect the settings-page launch? Marketing wants it for the campaign on the first.
+[00:02:03] Iris Park: The settings page is code-complete. I'm blocked on the API for saving notification preferences — Dana owns that endpoint.
+[00:02:18] Dana Cole: I can get you the endpoint by Wednesday. It's small.
+[00:02:30] Iris Park: Then I can ship the settings page by the 29th, comfortably before the first.
+[00:02:44] Lena Fischer: Good. I'll update the roadmap and tell marketing the 29th is the date.
+[00:03:01] Ravi Menon: What about the flaky integration tests? They failed three times this sprint for no real reason.
+[00:03:14] Sam Okafor: It's a race condition in the test harness, not the product. I'll quarantine the two worst offenders and open a ticket, but it's not a Sprint 25 priority.
+[00:03:33] Ravi Menon: Fine, quarantine and defer. Last thing — Lena, any product changes for 25?
+[00:03:45] Lena Fischer: Just the settings page and then we start scoping SSO for enterprise. I'll bring a one-pager to next planning.
+[00:03:58] Ravi Menon: Great. Summary: Sam adds checkout alerting by the 24th, Dana delivers the preferences endpoint by Wednesday and reworks the migration to be online, Iris ships settings by the 29th, Lena updates the roadmap and preps the SSO one-pager. Thanks all.

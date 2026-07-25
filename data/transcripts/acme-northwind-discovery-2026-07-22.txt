@@ -1,0 +1,21 @@
+Meeting: Acme × Northwind — Discovery Call
+Date: 2026-07-22
+Attendees: Priya Shah (Acme, Account Executive), Marcus Bell (Acme, Sales Engineer), Tom Rivera (Northwind, VP Engineering), Grace Liu (Northwind, Procurement)
+
+[00:00:11] Priya Shah: Thanks for the time. To start — what's driving Northwind to look at this now?
+[00:00:24] Tom Rivera: Our support team manually tags every incoming ticket. It's about forty hours a week across the team, and the tagging is inconsistent, so our analytics are unreliable.
+[00:00:45] Marcus Bell: So the goal is automatic, consistent classification of tickets. Roughly what volume are we talking about?
+[00:00:56] Tom Rivera: About twelve thousand tickets a month, spiking to eighteen thousand during releases.
+[00:01:14] Grace Liu: I'll flag now that anything we adopt has to clear our security review, and we can't send customer data to a third-party model without a data processing agreement.
+[00:01:33] Marcus Bell: Understood. We support a private deployment in your own cloud, so ticket data never leaves your environment. That usually satisfies the DPA concern.
+[00:01:52] Grace Liu: That helps. I'll still need your SOC 2 report and a completed security questionnaire for the review board.
+[00:02:07] Priya Shah: We can send both. Marcus, can you own getting the SOC 2 and questionnaire over to Grace?
+[00:02:16] Marcus Bell: Yes, I'll send them by Thursday.
+[00:02:27] Tom Rivera: The other thing is accuracy. If it mis-tags, my team trusts it less than doing it by hand. How do we know it's good enough?
+[00:02:44] Marcus Bell: We'd run a two-week proof of concept on your historical tickets and measure classification accuracy against your existing labels before you commit to anything.
+[00:03:01] Tom Rivera: That's the right approach. Let's scope a POC.
+[00:03:10] Grace Liu: What's the pricing model, roughly? I need a number for budgeting even if it's a range.
+[00:03:22] Priya Shah: It's per-ticket-volume with an annual platform fee. For your volume I'd estimate the mid five figures annually, but I'll send an exact proposal.
+[00:03:40] Priya Shah: So next steps: Marcus sends SOC 2 and the security questionnaire by Thursday, I'll send a formal proposal with POC scope and pricing by the 29th, and we'll target a two-week POC on historical tickets. Tom, can your team pull six months of labelled tickets for the POC?
+[00:04:02] Tom Rivera: We can. I'll have the export ready by the end of next week.
+[00:04:11] Priya Shah: Perfect. Thanks everyone.
