@@ -47,11 +47,12 @@ async def ingest(file: UploadFile) -> dict:
 
 class AskRequest(BaseModel):
     question: str
+    transcript_id: int | None = None
 
 
 @app.post("/ask")
 def ask(req: AskRequest) -> dict:
-    return answer_question(req.question)
+    return answer_question(req.question, req.transcript_id)
 
 
 @app.get("/transcripts/{transcript_id}/actions")

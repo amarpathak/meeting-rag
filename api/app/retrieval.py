@@ -19,23 +19,28 @@ def _to_pgvector(vec: list[float]) -> str:
     return "[" + ",".join(str(x) for x in vec) + "]"
 
 
-def retrieve(question: str) -> list[Retrieved]:
+def retrieve(question: str, transcript_id: int | None = None) -> list[Retrieved]:
     settings = get_settings()
     q_literal = _to_pgvector(embed_query(question))
 
     # `embedding <=> query` is cosine DISTANCE (0 = same direction). We report
     # `1 - distance` as similarity (1 = same direction) and sort by it, so the
-    # closest chunks come first. At this scale a sequential scan is fine; with
-    # many transcripts you'd `ORDER BY embedding <=> query` to use the index.
+    # closest chunks come first. When transcript_id is given, retrieval is scoped
+    # to that meeting — otherwise a question could pull chunks from other meetings.
+    sql = (
+        "SELECT id, content, speakers, ts_start, ts_end, "
+        "1 - (embedding <=> %s::vector) AS similarity "
+        "FROM chunks "
+    )
+    params: list = [q_literal]
+    if transcript_id is not None:
+        sql += "WHERE transcript_id = %s "
+        params.append(transcript_id)
+    sql += "ORDER BY similarity DESC LIMIT %s"
+    params.append(settings.top_k)
+
     with cursor() as cur:
-        cur.execute(
-            "SELECT id, content, speakers, ts_start, ts_end, "
-            "       1 - (embedding <=> %s::vector) AS similarity "
-            "FROM chunks "
-            "ORDER BY similarity DESC "
-            "LIMIT %s",
-            (q_literal, settings.top_k),
-        )
+        cur.execute(sql, params)
         rows = cur.fetchall()
 
     return [

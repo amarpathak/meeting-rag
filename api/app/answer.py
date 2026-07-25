@@ -8,11 +8,11 @@ from .prompts import ANSWER_SYSTEM_PROMPT, build_answer_prompt
 from .retrieval import retrieve
 
 
-def answer_question(question: str) -> dict:
+def answer_question(question: str, transcript_id: int | None = None) -> dict:
     settings = get_settings()
     started = time.monotonic()
 
-    chunks = retrieve(question)
+    chunks = retrieve(question, transcript_id)
     top_score = chunks[0].similarity if chunks else 0.0
 
     # Layer 1: if even the best chunk is below the floor, refuse WITHOUT a model
