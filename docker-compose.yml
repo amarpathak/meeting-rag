@@ -26,6 +26,7 @@ services:
     volumes:
       - ./api:/app
       - ./data:/data:ro
+      - ./evals:/app/evals
     depends_on:
       db:
         condition: service_healthy
