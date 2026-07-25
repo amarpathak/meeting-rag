@@ -18,7 +18,7 @@ make health
 - [x] Phase 3 — retrieval, answering, refusal path
 - [x] Phase 4 — action item extraction
 - [ ] Phase 5 — UI
-- [ ] Phase 6 — evals and tests
+- [x] Phase 6 — evals and tests
 - [ ] Phase 7 — writeup
 - [x] Bonus — audio → transcript (Gemini multimodal), chains into ingest
 
