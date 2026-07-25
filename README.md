@@ -14,7 +14,7 @@ make health
 ## Status
 
 - [x] Phase 1 — scaffold, schema, health
-- [ ] Phase 2 — parsing, chunking, embedding, ingest
+- [x] Phase 2 — parsing, chunking, embedding, ingest
 - [ ] Phase 3 — retrieval, answering, refusal path
 - [ ] Phase 4 — action item extraction
 - [ ] Phase 5 — UI
