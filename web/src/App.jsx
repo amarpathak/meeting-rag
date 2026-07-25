@@ -39,9 +39,10 @@ function Score({ value }) {
 
 function LoadModal({ onClose, onDone }) {
   const [busy, setBusy] = useState("");
+  const [error, setError] = useState("");
   const run = async (label, fn) => {
-    setBusy(label);
-    try { await fn(); onDone(); } catch (e) { alert("Failed: " + e.message); } finally { setBusy(""); }
+    setBusy(label); setError("");
+    try { await fn(); onDone(); } catch (e) { setError(e.message); } finally { setBusy(""); }
   };
   return (
     <div className="overlay" onClick={onClose}>
@@ -69,7 +70,11 @@ function LoadModal({ onClose, onDone }) {
           </button>
           <button className="btn ghost" onClick={onClose}>Close</button>
         </div>
-        {busy && busy !== "sample" ? <p className="muted" style={{ marginTop: 12 }}><span className="spinner" /> Processing {busy}…</p> : null}
+        {error ? (
+          <p className="modal-err">{error}</p>
+        ) : busy && busy !== "sample" ? (
+          <p className="muted" style={{ marginTop: 12 }}><span className="spinner" /> Processing {busy}…</p>
+        ) : null}
       </div>
     </div>
   );

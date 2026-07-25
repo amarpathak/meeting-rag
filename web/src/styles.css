@@ -178,6 +178,8 @@ button { font-family: inherit; cursor: pointer; }
 .drop span { font-size: 0.82rem; color: var(--ink-3); }
 .drop input { display: none; }
 .modal .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 8px; }
+.modal-err { margin-top: 14px; color: var(--refuse); background: var(--refuse-bg);
+  border: 1px solid var(--refuse); border-radius: 9px; padding: 9px 12px; font-size: 0.85rem; }
 
 @media (max-width: 880px) {
   .work { grid-template-columns: 1fr; grid-template-rows: 45% 55%; }
