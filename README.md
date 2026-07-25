@@ -20,6 +20,7 @@ make health
 - [ ] Phase 5 — UI
 - [ ] Phase 6 — evals and tests
 - [ ] Phase 7 — writeup
+- [x] Bonus — audio → transcript (Gemini multimodal), chains into ingest
 
 ## Notes
 

@@ -8,6 +8,7 @@ from .actions import extract_actions
 from .answer import answer_question
 from .config import get_settings
 from .ingest import ingest_transcript
+from .transcription import transcribe_audio
 
 logging.basicConfig(
     level=logging.INFO,
@@ -56,3 +57,30 @@ def ask(req: AskRequest) -> dict:
 @app.get("/transcripts/{transcript_id}/actions")
 def actions(transcript_id: int) -> dict:
     return extract_actions(transcript_id)
+
+
+_AUDIO_MIME = {
+    ".mp3": "audio/mpeg", ".wav": "audio/wav", ".aiff": "audio/aiff",
+    ".aif": "audio/aiff", ".m4a": "audio/mp4", ".flac": "audio/flac",
+    ".ogg": "audio/ogg", ".aac": "audio/aac",
+}
+
+
+def _audio_mime(file: UploadFile) -> str:
+    content_type = (file.content_type or "").lower()
+    if content_type.startswith("audio/"):
+        return content_type
+    name = (file.filename or "").lower()
+    for ext, mime in _AUDIO_MIME.items():
+        if name.endswith(ext):
+            return mime
+    return "audio/mpeg"
+
+
+@app.post("/transcribe")
+async def transcribe(file: UploadFile, ingest: bool = False) -> dict:
+    audio = await file.read()
+    result = transcribe_audio(file.filename or "audio", audio, _audio_mime(file))
+    if ingest:
+        result["ingest"] = ingest_transcript(file.filename or "audio.txt", result["transcript"])
+    return result

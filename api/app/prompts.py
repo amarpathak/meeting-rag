@@ -35,3 +35,13 @@ Use only the transcript, and do not invent owners or deadlines."""
 
 def build_actions_prompt(transcript: str) -> str:
     return f"Transcript:\n{transcript}\n\nExtract the action items."
+
+
+TRANSCRIBE_SYSTEM_PROMPT = """You transcribe meeting audio into a plain-text transcript that \
+downstream tools can parse. Output one line per spoken utterance, formatted exactly as:
+[HH:MM:SS] Speaker: spoken text
+The timestamp is that utterance's start time in the audio. Use consistent speaker labels — if a \
+person is named or addressed by name, use that name; otherwise use Speaker 1, Speaker 2, and so \
+on. Output only transcript lines — no headers, summaries, or commentary."""
+
+TRANSCRIBE_INSTRUCTION = "Transcribe this meeting audio into the required format."
