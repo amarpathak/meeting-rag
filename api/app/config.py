@@ -12,9 +12,29 @@ class Settings(BaseSettings):
 
     embedding_model: str = "gemini-embedding-001"
     embedding_dims: int = 768
-    # 'latest' alias so the reviewer's run doesn't break when a pinned flash
-    # version is retired (gemini-2.5-flash was already blocked for new keys).
-    answer_model: str = "gemini-flash-latest"
+    # Pinned versions, not the `-latest` alias. The alias resolved to a different
+    # model mid-build, and free-tier quota is per project *per model*: a silent
+    # shift moves you to a different daily bucket and makes eval runs taken
+    # either side of it incomparable.
+    #
+    # Ordered fallback chain. Free tier allows 20 generate calls per day per
+    # model, so one model alone is a hard stop after 20 requests; falling through
+    # to the next turns that into degraded service instead of an outage. Ordered
+    # best-first — later entries are cheaper and weaker, which is the right
+    # trade when the alternative is no answer at all.
+    answer_models: str = (
+        "gemini-2.5-flash,gemini-2.0-flash,gemini-3.5-flash,"
+        "gemini-2.5-flash-lite,gemini-2.0-flash-lite"
+    )
+
+    @property
+    def answer_model_chain(self) -> list[str]:
+        return [m.strip() for m in self.answer_models.split(",") if m.strip()]
+
+    @property
+    def answer_model(self) -> str:
+        """The preferred model — what we try first and report in /health."""
+        return self.answer_model_chain[0]
 
     # Below this cosine similarity we refuse rather than let the model improvise
     # from weak context. 0.60 tuned against evals/ for gemini-embedding-001:
