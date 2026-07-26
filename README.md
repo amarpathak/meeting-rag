@@ -7,15 +7,20 @@ Also extracts action items. Transcripts come from text or audio.
 
 ## Quick setup
 
-A Gemini key takes about thirty seconds to create at
-[aistudio.google.com/apikey](https://aistudio.google.com/apikey), and the free tier
-covers everything here.
-
 ```bash
-cp .env.example .env      # paste the key into GEMINI_API_KEY
+cp .env.example .env      # a working key is already in there
 make up                   # db, api (:8000), web UI (:5173)
 make health               # {"status":"ok","db":true,"pgvector":true,...}
 ```
+
+`.env.example` ships with a disposable free-tier Gemini key so this runs with no
+signup. That is a deliberate trade for review convenience, not how I'd handle a
+secret otherwise: it is scoped to nothing but this API, capped at 20 requests per
+day per model, and revoked once review is done. The Productionizing section below
+is what I would actually do, and `.env` itself stays gitignored. If you hit the
+cap, swap in your own key from
+[aistudio.google.com/apikey](https://aistudio.google.com/apikey) — it takes about
+thirty seconds.
 
 Open **http://localhost:5173**, load one of the four bundled meetings, ask away.
 `make test` runs 42 tests, `make eval` runs the retrieval eval, `make down` stops.
