@@ -8,7 +8,7 @@ from .normalize import normalize_transcript
 from .parsing import parse_transcript
 
 
-def _content_hash(raw: str) -> str:
+def content_hash(raw: str) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
@@ -20,13 +20,13 @@ def _to_pgvector(vec: list[float]) -> str:
 
 def ingest_transcript(filename: str, raw: str) -> dict:
     settings = get_settings()
-    content_hash = _content_hash(raw)
+    digest = content_hash(raw)
 
     # Idempotency gate — checked BEFORE embedding. The hash needs only the raw
     # bytes, so we spend nothing to discover a re-upload. Embedding is the only
     # step that costs money and network, so it must sit behind this check.
     with cursor() as cur:
-        cur.execute("SELECT id FROM transcripts WHERE content_hash = %s", (content_hash,))
+        cur.execute("SELECT id FROM transcripts WHERE content_hash = %s", (digest,))
         existing = cur.fetchone()
         if existing is not None:
             return {"status": "already_ingested", "transcript_id": existing[0], "chunks": 0}
@@ -57,7 +57,7 @@ def ingest_transcript(filename: str, raw: str) -> dict:
         cur.execute(
             "INSERT INTO transcripts (filename, title, content_hash) "
             "VALUES (%s, %s, %s) RETURNING id",
-            (filename, parsed.title, content_hash),
+            (filename, parsed.title, digest),
         )
         transcript_id = cur.fetchone()[0]
         for chunk, vec in zip(chunks, vectors):
