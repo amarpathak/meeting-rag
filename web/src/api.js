@@ -34,9 +34,14 @@ async function upload(path, file) {
 export const api = {
   meetings: () => getJSON("/transcripts"),
   transcript: (id) => getJSON(`/transcripts/${id}`),
-  ask: (question, transcriptId) => postJSON("/ask", { question, transcript_id: transcriptId }),
-  actions: (id) => getJSON(`/transcripts/${id}/actions`),
+  ask: (question, transcriptId, refresh = false) =>
+    postJSON("/ask", { question, transcript_id: transcriptId, refresh }),
+  actions: (id, refresh = false) => getJSON(`/transcripts/${id}/actions${refresh ? "?refresh=true" : ""}`),
   ingestText: (file) => upload("/ingest", file),
   ingestAudio: (file) => upload("/transcribe?ingest=true", file),
-  ingestSample: () => postJSON("/ingest-sample", {}),
+  samples: () => getJSON("/samples"),
+  ingestSample: (name) =>
+    postJSON(name ? `/ingest-sample?name=${encodeURIComponent(name)}` : "/ingest-sample", {}),
+  metrics: () => getJSON("/observability"),
+  ingestYouTube: (url) => postJSON("/ingest-youtube", { url }),
 };
