@@ -360,6 +360,17 @@ button { font-family: inherit; cursor: pointer; }
 .hint code { font-family: var(--mono); font-size: 0.9em; background: var(--surface-2);
   border: 1px solid var(--border); border-radius: 5px; padding: 0 4px; }
 
+/* Example links fill the field rather than fetching, so they read as suggestions
+   next to the hint, not as a second action competing with Fetch. */
+.examples { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.examples-lbl { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-3); }
+.example-chip { font-size: 0.74rem; padding: 3px 9px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--ink-2);
+  transition: border-color .15s, color .15s; }
+.example-chip:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-2); }
+.example-chip:disabled { opacity: .5; cursor: default; }
+
 .drops { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .drop { display: block; border: 1px dashed var(--border); border-radius: 11px; padding: 13px;
   cursor: pointer; transition: border-color .15s, background .15s; }

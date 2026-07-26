@@ -89,6 +89,14 @@ const BUSY_NOTE = {
 };
 const busyNote = (b) => (b.startsWith("sample:") ? "Chunking and embedding…" : BUSY_NOTE[b]);
 
+// Verified to have captions and to ingest cleanly. Clicking fills the field
+// instead of fetching, because the fetch itself spends a model call and that
+// should stay a deliberate press of the button.
+const YOUTUBE_EXAMPLES = [
+  { label: "GitLab engineering (public)", url: "https://www.youtube.com/watch?v=qGFoZ8yodc4" },
+  { label: "GitLab product marketing", url: "https://www.youtube.com/watch?v=lBVtvOpU80Q" },
+];
+
 function LoadModal({ onClose, onDone, onPick }) {
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
@@ -181,6 +189,13 @@ function LoadModal({ onClose, onDone, onPick }) {
         </form>
         <p className="hint">The captions themselves are free — the model call infers where the speaker
           turns are, so names read as Speaker 1, 2, 3.</p>
+        <div className="examples">
+          <span className="examples-lbl">try</span>
+          {YOUTUBE_EXAMPLES.map((ex) => (
+            <button key={ex.url} type="button" className="example-chip" disabled={!!busy}
+              title={ex.url} onClick={() => setUrl(ex.url)}>{ex.label}</button>
+          ))}
+        </div>
 
         <div className="modal-sec">
           <h4>From a file</h4>
