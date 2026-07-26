@@ -27,6 +27,9 @@ Open **http://localhost:5173**, load one of the four bundled meetings, ask away.
 
 ## Screenshots
 
+▶ [Walkthrough video](docs/walkthrough.mp4) (5½ min) if you'd rather watch it than
+read the rest of this.
+
 ![Grounded answer](docs/01-answer-citations.png)
 Every claim carries a speaker and timestamp; clicking one jumps the transcript there.
 
