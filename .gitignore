@@ -9,4 +9,3 @@ node_modules/
 .next/
 web/dist/
 evals/results/
-*.webm
