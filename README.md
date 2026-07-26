@@ -7,10 +7,14 @@ Also extracts action items. Transcripts come from text or audio.
 
 ## Quick setup
 
+A Gemini key takes about thirty seconds to create at
+[aistudio.google.com/apikey](https://aistudio.google.com/apikey), and the free tier
+covers everything here.
+
 ```bash
-cp .env.example .env      # add your GEMINI_API_KEY
+cp .env.example .env      # paste the key into GEMINI_API_KEY
 make up                   # db, api (:8000), web UI (:5173)
-make health
+make health               # {"status":"ok","db":true,"pgvector":true,...}
 ```
 
 Open **http://localhost:5173**, load one of the four bundled meetings, ask away.
