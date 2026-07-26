@@ -27,7 +27,7 @@ For each action item return:
 - owner: the person responsible.
 - task: what they committed to do, as a concise phrase.
 - due: the deadline exactly as stated in the meeting (e.g. "25th March"), or null if none was given.
-- timestamp: the [HH:MM:SS] where the commitment was made.
+- timestamp: when the commitment was made, as bare digits HH:MM:SS with no surrounding brackets.
 
 Include only real commitments — not hypotheticals, suggestions, or general discussion. \
 Use only the transcript, and do not invent owners or deadlines."""
