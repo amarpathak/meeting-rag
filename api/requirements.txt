@@ -6,4 +6,5 @@ pydantic-settings==2.7.0
 python-multipart==0.0.20
 httpx==0.28.1
 google-genai>=1.0.0  # Gemini client for embeddings + answer generation (single provider)
+youtube-transcript-api==1.2.2  # pulls existing YouTube captions, so a video costs no transcription call
 pytest==8.3.4
