@@ -1,5 +1,4 @@
 .env
-CLAUDE.md
 .qodo/
 .vscode/
 .claude/
@@ -8,4 +7,5 @@ __pycache__/
 .pytest_cache/
 node_modules/
 .next/
+web/dist/
 evals/results/
