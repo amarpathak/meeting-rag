@@ -1,10 +1,10 @@
-fastapi==0.115.6
-uvicorn[standard]==0.34.0
-psycopg[binary,pool]==3.2.3
-pydantic==2.10.4
-pydantic-settings==2.7.0
-python-multipart==0.0.20
-httpx==0.28.1
+fastapi==0.115.6  # typed request models and DI without dragging in an ORM
+uvicorn[standard]==0.34.0  # the ASGI server FastAPI runs on; [standard] adds uvloop
+psycopg[binary,pool]==3.2.3  # Postgres driver; pooled so pgvector queries reuse connections
+pydantic==2.10.4  # request models, and the schema Gemini structured output validates against
+pydantic-settings==2.7.0  # config from .env without hand-rolling the parsing
+python-multipart==0.0.20  # FastAPI needs it to accept transcript and audio uploads
+httpx==0.28.1  # fetches the YouTube watch page for a title, since oEmbed 401s here
 google-genai>=1.0.0  # Gemini client for embeddings + answer generation (single provider)
 youtube-transcript-api==1.2.2  # pulls existing YouTube captions, so a video costs no transcription call
-pytest==8.3.4
+pytest==8.3.4  # tests
